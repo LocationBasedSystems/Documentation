@@ -1,4 +1,4 @@
-\begin{thebibliography}{{Kne}17}
+\begin{thebibliography}{{Wox}14}
 
 \bibitem[{Kne}17]{kneer_benjamin_indoor_2017}
 {Kneer, Benjamin}.
@@ -16,5 +16,9 @@
 {Veness, Chris}.
 \newblock Calculate distance, bearing and more between {Latitude}/{Longitude}
   points, 2002.
+
+\bibitem[{Wox}14]{woxblom_magnus_draglistview_2014}
+{Woxblom, Magnus}.
+\newblock {DragListView}, https://github.com/woxblom/{DragListView}, 2014.
 
 \end{thebibliography}

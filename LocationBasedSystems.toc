@@ -13,3 +13,10 @@
 \contentsline {section}{\numberline {6.2}WiFi Direct}{17}
 \contentsline {section}{\numberline {6.3}Umsetzung}{18}
 \contentsline {chapter}{\numberline {7}Ein Spiel...}{21}
+\contentsline {section}{\numberline {7.1}Spielprinzip}{21}
+\contentsline {subsection}{\numberline {7.1.1}Schnitzeljagd spielen}{21}
+\contentsline {subsection}{\numberline {7.1.2}Schnitzeljagd erstellen}{21}
+\contentsline {section}{\numberline {7.2}Umsetzung}{22}
+\contentsline {subsection}{\numberline {7.2.1}Clue}{22}
+\contentsline {subsection}{\numberline {7.2.2}Paperchase}{22}
+\contentsline {subsection}{\numberline {7.2.3}Persistenz}{22}

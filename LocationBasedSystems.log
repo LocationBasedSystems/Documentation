@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=latex 2018.1.15)  17 JAN 2018 12:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=latex 2018.1.15)  17 JAN 2018 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -531,16 +531,41 @@ ss Pi-ont(WAP). Statt
 
 ]
 Kapitel 7.
-(./LocationBasedSystems.bbl [21] [22
+(./schnitzeljagd/schnitzeljagd.tex [21]
+! german: The command "/ is undefined.
+\grmn@dq@error ...and \dq \string #1 is undefined}
+                                                  
+l.18 ...s eine weitere Datei in das Verzeichnis "/
+                                                  IndoorPositioning/Exported...
 
-]) [23] (./LocationBasedSystems.aux) ) 
+? 
+
+Overfull \hbox (6.30615pt too wide) in paragraph at lines 17--19
+\OT1/cmr/m/n/10 dem Be-en-den der App noch vor-han-den sind, wird ei-ne Persist
+enz-L[]osung ben[]otigt.
+ []
+
+[22])
+Overfull \hbox (9.9451pt too wide) in paragraph at lines 20--45
+[]\OT1/cmr/m/n/10 Diese Import- und Ex-port-funk-ti-on bie-tet au-^^Yer-dem ei-
+ne her-vor-ra-gen-de Schnitt-
+ []
+
+(./LocationBasedSystems.bbl [23] [24
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 21--23
+[]\OT1/cmr/m/n/10 Woxblom, Ma-gnus.  Drag-List-View, htt-
+ []
+
+) [25] (./LocationBasedSystems.aux) ) 
 Here is how much of TeX's memory you used:
- 2649 strings out of 492981
- 32440 string characters out of 6136233
+ 2656 strings out of 492981
+ 32590 string characters out of 6136233
  110597 words of memory out of 5000000
- 6199 multiletter control sequences out of 15000+600000
- 10627 words of font info for 38 fonts, out of 8000000 for 9000
+ 6202 multiletter control sequences out of 15000+600000
+ 10934 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  27i,9n,21p,1951b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on LocationBasedSystems.dvi (23 pages, 29432 bytes).
+Output written on LocationBasedSystems.dvi (25 pages, 39412 bytes).
