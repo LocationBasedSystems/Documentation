@@ -8,4 +8,8 @@
 \contentsline {section}{\numberline {3.5}GlobalNode}{12}
 \contentsline {chapter}{\numberline {4}Indoor Navigation}{13}
 \contentsline {chapter}{\numberline {5}Indoor-Informationssystem}{15}
-\contentsline {chapter}{\numberline {6}Ein Spiel...}{17}
+\contentsline {chapter}{\numberline {6}Beacon}{17}
+\contentsline {section}{\numberline {6.1}Funktionsumfang}{17}
+\contentsline {section}{\numberline {6.2}WiFi Direct}{17}
+\contentsline {section}{\numberline {6.3}Umsetzung}{18}
+\contentsline {chapter}{\numberline {7}Ein Spiel...}{21}
