@@ -1,0 +1,104 @@
+
+\section{Berechnung globaler Koordinaten}
+Orte auf dem Erdball werden mit Längen- und Breitengraden beschrieben. Die Orte in der vorhandenen App \enquote{Indoor-Route-Finder} arbeiten jedoch mit einem kartesischen Koordinatensystem für die lokalen Koordinaten des jeweiligen Punktes \cite{kneer_benjamin_indoor_2017}. Wenn nun ein Punkt im Graph seine globalen Koordinaten erhält (z.B. per GPS) soll es möglich sein für die restlichen Punkte im Graph die globalen Koordinaten mithilfe der lokalen zu errechnen. Dies geschieht mithilfe der Formeln für einen Zielpunkt $P_2(\varphi_2|\lambda_2)$ bei gegebener Distanz $d$, gegebenem Azimut $\theta$ und gegebenem Startpunkt $P_1(\varphi_1|\lambda_1)$:
+
+\begin{equation}
+\tag{1}
+\varphi_2 = \arcsin\left(
+\cos(\varphi_1)\sin(\delta)\cos(\theta) + \sin(\varphi_1)\cos(\delta)
+\right)
+\end{equation}
+
+\begin{equation}
+\tag{2}
+\lambda_2 = \lambda_1 + \arctan2\left(\cos(\varphi_1)\sin(\theta)\sin(\delta), \cos(\delta) - \sin(\varphi_1)\sin(\varphi_2)\right)
+\end{equation}
+
+Als Azimut wird hierbei der Start-Kompass-Kurs, auch \enquote{Sollkurs} genannt, vom Startpunkt zum Zielpunkt, wenn man einem Großkreisbogen folgt, bezeichnet \cite{us_army_map_1993}. Start-Kurs deshalb, weil der tatsächliche Kurs für die kürzeste Strecke zwischen zwei Punkten sich während der Fahrt in den meisten Fällen ändert.
+
+Um diese Formeln herzuleiten muss zunächst ein Kugeldreieck zwischen $P_1$, $P_2$ und dem Nordpol angenommen werden. $\psi_1$ und $\psi_2$ seien nun die Winkel am Kugelmittelpunkt zwischen der Strecke zum Nordpol und der Strecke zu dem jeweiligen $P$. Dieser Winkel wird auch als Winkeldistanz zwischen dem jeweiligen Punkt und dem Nordpol bezeichnet. Der Winkel $\delta$ sei die Winkeldistanz zwischen $P_1$ und $P_2$ und lässt sich mit $\delta = \frac{d}{r}$ berechnen, wobei $r$ den Radius der Erde und $d$ die Distanz zwischen den Punkten darstellt.
+
+Die Kosinus-Regel für allgemeine Kugeldreiecke besagt:
+$$
+\cos(a) = \cos(b)\cos(c) + \sin(b)\sin(c)\cos(A)
+$$
+wobei $a$, $b$ und $c$ die Winkeldistanzen der Seiten des Dreiecks (also die Länge der Seiten im Bogenmaß im Einheitskreis) sind und der Winkel $A$ der von $b$ und $c$ eingeschlossene Winkel. In die Kosinus-Regel werden nun unsere Variablen eingesetzt:
+\begin{equation}
+\tag{3}
+\cos(\psi_2) = \cos(\psi_1)\cos(\delta) + \sin(\psi_1)\sin(\delta)\cos(\theta)
+\end{equation}
+Anstatt der Winkeldistanz zum Nordpol benötigt man allerdings einen Breitengrad. Dieser lässt sich jedoch mit $\psi_i = \frac{\pi}{2} - \varphi_1$ aus der Winkeldistanz bestimmen. Dies setzen wir nun unter Beachtung von $\sin(\frac{\pi}{2} - \alpha) = \cos(\alpha)$ und $\cos(\frac{\pi}{2} - \alpha) = \sin(\alpha)$ in Gleichung (3) ein:
+\begin{equation}
+\tag{3'}
+\sin(\varphi_2) = \sin(\varphi_1)\cos(\delta) + \cos(\varphi_1)\sin(\delta)\cos(\theta)
+\end{equation}
+Durch Umformung erhalten wir schließlich:
+\begin{equation}
+\tag{1}
+\varphi_2 = \arcsin\left(
+\cos(\varphi_1)\sin(\delta)\cos(\theta) + \sin(\varphi_1)\cos(\delta)
+\right)
+\end{equation}
+
+Zur Berechnung des Längengrades benötigt man zunächst wieder die Kosinus-Regel für allgemeine Kugeldreiecke. Aus dieser lässt sich die Gleichung
+\begin{align}
+\tag{4}
+\cos(\delta) &= \sin(\varphi_1)\sin(\varphi_2) + \cos(\varphi_1)\cos(\varphi_2)\cos(\Delta\lambda) \Leftrightarrow \\
+\tag{4'}
+\cos(\Delta\lambda) &= \frac{\cos(\delta) - \sin(\varphi_1)\sin(\varphi_2)}{
+\cos(\varphi_1)\cos(\varphi_2)}
+\end{align}
+bilden. Im folgenden muss nun die Formel zur Bestimmung des Azimut \cite{veness_chris_calculate_2002} genutzt werden:
+\begin{equation}
+\tag{5}
+\tan(\theta) = \frac{\sin(\Delta\lambda)\cos(\varphi_2)}{\cos(\varphi_1)\sin(\varphi_2)-\sin(\varphi_1)\cos(\varphi_2)\cos(\Delta\lambda)}
+\end{equation}
+Bei Umstellung dieser erhält man:
+\begin{align}
+\tag{5'}
+\sin(\theta)\left[
+\cos(\varphi_1)\sin(\varphi_2) - \sin(\varphi_1)\cos(\varphi_2)\cos(\Delta\lambda)\right]
+ &=
+\sin(\Delta\lambda)\cos(\varphi_2)\cos(\theta)
+\end{align}
+Zuletzt muss die Gleichung (3') umgestellt werden zu:
+\begin{equation}
+\tag{6}
+\cos(\theta) = \frac{\sin(\varphi_2) - \sin(\varphi_1)\cos(\delta)}{\cos(\varphi_1)\sin(\delta)}
+\end{equation}
+Jetzt wird $\cos(\Delta\lambda)$ mithilfe von (4') und $\cos(\theta)$ mithilfe von (6) in (5') ersetzt und man erhält:
+\begin{equation}
+\tag{7}
+\sin(\Delta\lambda) = \frac{\sin(\theta)\sin(\delta)}{\cos(\varphi_2)}
+\end{equation}
+Der Tangens der Längengrad-Differenz lässt sich nun mit den Gleichungen (7) und (4') bilden:
+$$
+\tan(\Delta\lambda) = \frac{\sin(\Delta\lambda)}{\cos(\Delta\lambda)}
+=
+\frac{\cos(\varphi_1)\sin(\theta)\sin(\delta)}{\cos(\delta) - \sin(\varphi_1)\sin(\varphi_2)}
+$$
+Dies lässt sich schließlich nach $\lambda_2$ auflösen um die Formel für den Längengrad zu erhalten:
+\begin{equation}
+\tag{2}
+\lambda_2 = \lambda_1 + \arctan2\left(\cos(\varphi_1)\sin(\theta)\sin(\delta), \cos(\delta) - \sin(\varphi_1)\sin(\varphi_2)\right)
+\end{equation}
+
+Die Distanz $d$ zwischen beiden Punkten lässt sich im kartesischen Koordinatensystem recht trivial berechnen, ebenso der Azimut, da das relative Koordinatensystem an den Himmelsrichtungen ausgerichtet ist. Zur Berechnung des Azimut muss nur die Kompassrichtung zum anderen Punkt bestimmt werden. Dies kann mit $\theta = \arctan2((x_2 - x_1), (y_2 - y_1))$ und einer anschließenden Korrektur von $\theta + 360$ wenn das erste Ergebnis negativ ist.
+
+\section{Locator}
+Die \textit{Locator} Komponente bietet die Funktionalität der Ortung mithilfe von WiFi-Fingerprinting oder GPS. Da WiFi-Fingerprinting lediglich vorher definierte Positionen (Nodes) unterscheiden kann liefert die Komponente bei der GPS-Ortung auch keine Koordinaten sondern Nodes. Dies hat zur Folge, dass die Ortung einen auch an keinem Ort lokalisieren kann, obwohl GPS-Koordinatemn bestimmt werden können. Nodes können dabei einen WiFi-Fingerprint, eine globale Koordinate oder beides haben. Primär soll die Ortung mit Fingerprints benutzt werden. Diese Ortung soll allerdings durch GPS \enquote{kontrolliert} werden: Die Ortung mit WiFi-Fingerprints zeigte sich im Laufe der Entwicklung als nicht unfehlbar und wenn der gefundene Ort globale Koordinaten besitzt so kann zusammen mit der Ungenauigkeitsbewertung (in Metern), die durch das Android-Betriebssystem bei einer GPS-Ortung geliefert wird, die Plausibilität der Ortung getestet werden. Zwar ist GPS in Gebäuden ungenau, dies wird aber bei der Ungenauigkeitsbewertung mit einbezogen. Ist nun also beispielsweise die Ungenauigkeit $\pm20m$ und ein Punkt ist $10m$ von der bestimmten GPS-Position entfernt so stimmt diese Ortung vermutlich. Aber auch wenn der Punkt $30m$ entfernt ist kann die Ortung durchaus korrekt sein, aber bei zum Beispiel $100m$ Entfernung kann davon ausgegangen werden, das die Ortung nicht stimmt. Wo genau diese Akzeptanzgrenze liegt müsste durch ausgiebige Tests bestimmt werden.
+
+Liefert die Ortung mit Fingerprinting keinen oder einen nicht plausiblen Ort zurück so wird GPS zur Ortung genutzt. Es wird die Position bestimmt und wenn sich ein Punkt innerhalb eines $50m$ Umkreises (auch hier werden weitere Tests für eine nähere Bestimmung dieser Grenze benötigt) befindet so kann dieser als Position angenommen werden. Befinden sich mehrere Punkte in diesem Umkreis wird der Punkt angenommen, welcher der gefundenen Position am nächsten liegt.
+
+Der Locator kann entweder eventbasiert (durch Registrieren eines \textit{LocationChangeListener}s) oder auf Abruf mit der Methode \textit{getLastLocation()} genutzt werden. In beiden Fällen muss jedoch die Ortsbestimmung durch die Methode \textit{startLocationUpdates()} vor Nutzung der Komponente gestartet werden. Es empfiehlt sich zum Sparen von Ressourcen wie zum Beispiel der Akkuladung die Ortsbestimmung mit der Methode \textit{stopLocationUpdates()} anzuhalten.
+
+Die \textit{Locator}-Komponente folgt dem Singleton-Pattern, es kann also nur einen \textit{Locator} gleichzeitig zur Laufzeit einer App geben. Die \textit{Locator}-Instanz kann mithilfe der Klasse \textit{LocatorFactory} erhalten werden.
+
+\section{GlobalLocalCoordinateCalculator}
+Dieses Interface dient der Implementation von Klassen, die die lokalen Koordinaten zur Berechnung von globalen nutzen. Die einzige Klasse, die dieses Interface ausreichend implementiert ist die \textit{CosineLocalGlobalCoordinateCalculator}-Klasse. Diese nutzt die von der Kosinusregel für allgemeine Kugeldreiecke abgeleiteten Formeln zur Berechnung der Koordinaten.
+
+\section{GlobalCoordinateUpdaterImpl}
+Diese Klasse dient dazu für alle Nodes, für die dies möglich ist, globale Koordinaten zu berechnen. Sie bedient sich dafür der Funktionalität der in der Klasse \textit{GlobalLocalCoordinateCalculatorFactory} definierten Implementation vom Interface \textit{GlobalLocalCoordinateCalculator}. Ob ein Ort neue, berechnete, globale Koordinaten erhält hängt vom Ungenauigkeitsfaktor der alten Koordinaten ab. Sind die alten Koordinaten genauer, so werden keine neuen Koordinaten berechnet. Sind sie jedoch ungenauer als die Koordinaten der \enquote{Koordinatenquelle} plus der Ungenauigkeit, die aufgrund der Distanz zwischen Quelle und dem Ort hinzukommt, so werden neue, berechnete Koordinaten zugewiesen.
+
+\section{GlobalNode}
+Diese Klasse erweitert die in der App \enquote{Indoor-Route-Finder} befindliche Klasse \textit{Node} um die Funktionalität globale Koordinaten und einen Ungenauigkeitswert für diese Koordinaten zu verwalten. Diese Daten werden in dem String-Feld \textit{additionalInfo} der Klasse \textit{Node} abgelegt. Dies ermöglicht eine Datenverlust-freie Konvertierung von Objekten der Klasse \textit{GlobalNode} zu \textit{Node} und zurück. Außerdem können so weiterhin die bestehenden Funktionen der App \enquote{Indoor-Route-Finder} ohne Änderungen im Quellcode genutzt werden.
